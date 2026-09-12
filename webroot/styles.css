@@ -1,0 +1,1476 @@
+/* =========================
+   ROOT / COLOR SYSTEM
+========================= */
+:root {
+  /* Backgrounds */
+  --bg-light: #f2f2f7;
+  --bg-dark: #000000;           /* PURE BLACK */
+
+  /* Cards */
+  --card-light: #ffffff;
+  --card-dark: #1c1c1e;         /* iOS dark card */
+
+  /* Text */
+  --text-light: #000000;
+  --text-dark: #ffffff;
+
+  /* Sub text */
+  --sub-light: #8a8a8e;
+  --sub-dark: #98989d;
+
+  /* Dividers */
+  --divider-light: #c6c6c8;
+  --divider-dark: #38383a;
+
+  /* Accents */
+  --apple-green: #30d158;       /* Toggle / Online */
+  --apple-green-soft: rgba(48,209,88,.18);
+
+  --danger: #ff453a;            /* Error / Hot */
+  --turbo: #ffd60a;             /* Boost / Power */
+}
+/* =========================
+   BASE
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text-light);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+body.dark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* =========================
+   BANNER (FIXED)
+========================= */
+.banner {
+  position: relative;
+  height: 130px;
+  border-radius: 22px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+}
+
+/* Base media layer */
+.banner img,
+.banner video {
+  position: relative;
+  z-index: 0;                 /* 🔥 important */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Gradient overlay */
+.banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.7),
+    rgba(0,0,0,.25),
+    rgba(0,0,0,0)
+  );
+  z-index: 1;
+  pointer-events: none;       /* 🔥 never block touches */
+}
+
+/* =========================
+   BANNER TEXT
+========================= */
+.banner-text {
+  position: absolute;
+  left: 16px;
+  bottom: 14px;
+  z-index: 3;                 /* above overlays */
+  color: #fff;
+  pointer-events: none;       /* 🔥 prevents touch conflicts */
+}
+
+.banner-text h1 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.banner-text p {
+  margin: 3px 0 0;
+  font-size: 13px;
+  opacity: .85;
+}
+
+/* =========================
+   STATUS BADGE
+========================= */
+.status-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  color: #fff;
+  backdrop-filter: blur(8px);
+  z-index: 4;
+}
+
+.status-badge.online { background: rgba(48,209,88,.95); }
+.status-badge.offline { background: rgba(255,69,58,.95); }
+
+/* =========================
+   BANNER ICON BUTTONS
+========================= */
+.lang-btn,
+.banner-edit-btn {
+  position: absolute;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.9);
+  color: #111;
+  box-shadow: 0 6px 16px rgba(0,0,0,.3);
+  backdrop-filter: blur(10px);
+  z-index: 6;
+  cursor: pointer;
+}
+
+.lang-btn { top: 12px; }
+.banner-edit-btn { top: 56px; }
+
+body.dark .lang-btn,
+body.dark .banner-edit-btn {
+  background: rgba(0,0,0,.6);
+  color: #fff;
+}
+
+/* =========================
+   CARDS
+========================= */
+.card {
+  background: var(--card-light);
+  border-radius: 20px;
+  padding: 16px;
+  margin-top: 14px;
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+body.dark .card {
+  background: var(--card-dark);
+}
+
+/* =========================
+   MODULE INFO
+========================= */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.info-item {
+  text-align: center;
+}
+
+.info-label {
+  font-size: 11px;
+  letter-spacing: .8px;
+  color: var(--sub-light);
+}
+
+.info-val {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.separator-vertical {
+  width: 1px;
+  height: 36px;
+  background: var(--divider-light);
+}
+
+body.dark .info-label {
+  color: var(--sub-dark);
+}
+
+body.dark .separator-vertical {
+  background: var(--divider-dark);
+}
+
+.item-desc {
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: var(--sub-light);
+}
+
+body.dark .item-desc {
+  color: var(--sub-dark);
+}
+
+/* =========================
+   BATTERY / ROWS
+========================= */
+.mono-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  font-size: 14px;
+}
+
+.mono-row span {
+  color: var(--sub-light);
+}
+
+.mono-row b {
+  font-weight: 800;
+}
+
+.divider {
+  height: 1px;
+  background: var(--divider-light);
+}
+
+body.dark .divider {
+  background: var(--divider-dark);
+}
+
+body.dark .mono-row span {
+  color: var(--sub-dark);
+}
+
+/* BATTERY POWER COLORS */
+#batteryPower {
+  font-weight: 900;
+}
+
+#batteryPower.charge {
+  color: var(--apple-green);
+}
+
+#batteryPower.discharge {
+  color: var(--danger);
+}
+
+#batteryPower.turbo {
+  color: var(--turbo);
+  text-shadow: 0 0 12px rgba(255,210,120,.8);
+}
+
+/* =========================
+   CPU (COMPACT)
+========================= */
+.cpu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;                 /* reduced spacing */
+  text-align: center;
+  font-weight: 600;         /* slightly lighter */
+  font-size: 14px;          /* smaller text */
+  line-height: 1.25;
+}
+
+canvas {
+  width: 100%;
+  height: 56px;             /* 🔥 main size reduction */
+  margin-top: 6px;
+  border-radius: 10px;
+}
+
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;          /* smaller footer text */
+  margin-top: 4px;
+  line-height: 1.3;
+  color: var(--sub-light);
+}
+
+body.dark .footer-grid {
+  color: var(--sub-dark);
+}
+
+/* =========================
+   THERMAL PROFILE
+========================= */
+.profile-row {
+  position: relative;
+  display: flex;
+  padding: 6px;
+  border-radius: 16px;
+  background: #f0f1f3;
+  overflow: hidden;
+}
+
+body.dark .profile-row {
+  background: #000000;
+}
+
+.profile-indicator {
+  position: absolute;
+  inset: 6px auto 6px 6px;
+  width: calc((100% - 12px) / 3);
+  border-radius: 12px;
+  background: var(--apple-green-soft);
+  border: 2px solid var(--apple-green);
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+
+.profile-btn {
+  flex: 1;
+  height: 54px;
+  border: none;
+  background: transparent;
+  font-weight: 800;
+  cursor: pointer;
+  z-index: 1;
+  color: var(--sub-light);
+}
+
+.profile-btn.active {
+  color: var(--apple-green);
+}
+
+body.dark .profile-btn {
+  color: var(--sub-dark);
+}
+
+/* =========================
+   SWITCH
+========================= */
+.switch {
+  position: relative;
+  width: 46px;
+  height: 26px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #d1d1d6;
+  border-radius: 30px;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 2px;
+  top: 2px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform .25s;
+}
+
+input:checked + .slider {
+  background: var(--apple-green);
+}
+
+input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s;
+  z-index: 100;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  width: 92%;
+  max-width: 400px;
+  background: var(--card-light);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0,0,0,.6);
+}
+
+body.dark .modal-card {
+  background: var(--card-dark);
+}
+
+.modal-header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--divider-light);
+}
+
+.modal-body {
+  padding: 16px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* =========================
+   PREVIEW (FINAL – CLEAN)
+========================= */
+.preview-container {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: #111;
+}
+
+.preview-container img,
+.preview-container video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#previewOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* PREVIEW texture / label (bottom-right) */
+.preview-badge {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  z-index: 3;
+}
+
+#previewVideo {
+  display: none;
+}
+
+/* =========================
+   GALLERY
+========================= */
+.banner-gallery-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.gallery-item {
+  min-width: 110px;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 3px solid transparent;
+  background: #111;
+}
+
+.gallery-item.selected {
+  border-color: var(--apple-green);
+}
+
+.gallery-item img,
+.gallery-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================
+   SLIDERS
+========================= */
+.ios-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: #d1d1d6;
+}
+
+body.dark .ios-range {
+  background: #2c2f36;
+}
+
+.ios-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--apple-green);
+  box-shadow: 0 2px 8px rgba(0,0,0,.5);
+}
+
+/* =========================
+   SAVE BUTTON
+========================= */
+.modal-footer-btn {
+  width: 100%;
+  padding: 15px;
+  border-radius: 16px;
+  border: none;
+  background: var(--apple-green);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* ---- CARD SPACING FIX ---- */
+.card {
+  margin-top: 16px;
+}
+
+/* Stronger depth in dark mode */
+body.dark .card {
+  box-shadow:
+    0 14px 40px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+/* ---- DARK MODE ROW FIX ---- */
+.card.row {
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card.row h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* Switch alignment */
+.card.row .switch {
+  flex-shrink: 0;
+}
+
+/* ---- BATTERY ROW FIX ---- */
+.mono-row {
+  padding: 9px 0;
+}
+
+.mono-row span {
+  font-size: 14px;
+}
+
+.mono-row b {
+  font-size: 14px;
+}
+
+/* Divider visibility */
+.divider {
+  opacity: .55;
+}
+
+body.dark .divider {
+  opacity: .35;
+}
+
+/* ---- POWER COLOR VISIBILITY FIX ---- */
+#batteryPower.charge {
+  color: var(--apple-green);
+  font-weight: 900;
+}
+
+#batteryPower.discharge {
+  color: var(--danger);
+  font-weight: 900;
+}
+
+#batteryPower.turbo {
+  color: #ffd966;
+  text-shadow: 0 0 10px rgba(255,210,120,.9);
+}
+
+/* ---- CPU CARD BALANCE ---- */
+.cpu-grid {
+  margin-top: 8px;
+}
+
+.footer-grid {
+  margin-top: 10px;
+  font-size: 12.5px;
+}
+
+/* ---- PROFILE CARD FIX ---- */
+.profile-row {
+  padding: 8px;
+}
+
+.profile-btn {
+  height: 50px;
+}
+
+/* ---- MODAL SPACING FIX ---- */
+.modal-body {
+  padding-bottom: 20px;
+}
+
+.modal-footer-btn {
+  margin-top: 12px;
+}
+
+/* =========================
+   MODULE INFO – TRUE FINAL FIX
+========================= */
+
+.module-info {
+  padding: 16px 16px 18px;   /* slightly more bottom space */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;                /* better separation */
+}
+
+/* VERSION / AUTHOR GRID */
+.module-info .info-grid {
+  align-items: center;
+}
+
+/* Equal visual weight */
+.module-info .info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Labels */
+.module-info .info-label {
+  font-size: 11px;
+  letter-spacing: .6px;
+  opacity: .6;
+}
+
+/* Values */
+.module-info .info-val {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+/* Divider */
+.module-info .separator-vertical {
+  height: 20px;
+  opacity: .55;
+  align-self: center;
+}
+
+/* DESCRIPTION – final position */
+.module-info .item-desc {
+  margin: 0;
+  padding-top: 6px;         /* pushes text to proper place */
+  padding-bottom: 2px;
+
+  font-size: 13.5px;
+  line-height: 1.45;        /* IMPORTANT */
+  text-align: center;
+
+  opacity: .7;
+}
+
+/* Dark mode */
+body.dark .module-info .item-desc {
+  opacity: .75;
+}
+
+/* =========================
+   DARK MODE ROW (Dark Mode toggle)
+========================= */
+
+.card.row {
+  padding: 14px 16px;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+}
+
+.card.row h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* =========================
+   CARD CONSISTENCY (ALL CARDS)
+========================= */
+
+.card {
+  margin-top: 14px;
+  border-radius: 18px;
+}
+
+/* Light mode */
+body:not(.dark) .card {
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+}
+
+/* Dark mode */
+body.dark .card {
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+/* =========================
+   REMOVE VISUAL GAP UNDER BANNER
+========================= */
+.banner {
+  margin-bottom: 8px;
+}
+
+/* =========================
+   MAIN BANNER DARKNESS OVERLAY
+========================= */
+#bannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  pointer-events: none;              /* MUST never block touch */
+  transition: background .2s linear;
+  z-index: 2;
+}
+
+/* =========================
+   PERFORMANCE & SAFETY FIXES
+========================= */
+
+/* ✅ Android WebView horizontal scroll (NO STUCK, NO LAG) */
+.banner-gallery-scroll {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+  gap: 12px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* 🔥 CRITICAL FIXES */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+
+  /* ❌ smooth causes lag + stuck */
+  scroll-behavior: auto;
+}
+
+/* Hide scrollbar safely */
+.banner-gallery-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================
+   GALLERY ITEMS (OPTIMIZED)
+========================= */
+.gallery-item {
+  pointer-events: auto;              /* ensure clickable */
+  cursor: pointer;
+
+  /* Reduce repaint / layout cost */
+  contain: layout paint;
+}
+
+/* GPU hint ONLY during interaction (battery-safe) */
+.gallery-item:active {
+  will-change: transform;
+}
+
+/* =========================
+   BANNER MEDIA STACK SAFETY
+========================= */
+.banner img,
+.banner video {
+  position: relative;
+  z-index: 0;                        /* stays under overlays */
+}
+
+/* =========================
+   LANGUAGE BUTTON (GLOBAL)
+========================= *
+
+/* Settings page language button */
+.setting-btn {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: none;
+  background: var(--card-light);
+  color: var(--text-light);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+  cursor: pointer;
+}
+
+body.dark .setting-btn {
+  background: var(--card-dark);
+  color: var(--text-dark);
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+}
+
+/* =========================
+   DROPDOWN CONTAINER
+========================= */
+
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+/* =========================
+   LANGUAGE BUTTON (BANNER 🌐)
+========================= */
+
+.lang-btn {
+  pointer-events: auto !important;
+  z-index: 1000 !important;
+  cursor: pointer;
+}
+
+/* =========================
+   MINI LANGUAGE POPUP
+========================= */
+
+.lang-popup {
+  position: fixed;
+
+  /* Positioned near banner 🌐 */
+  top: 72px;
+  right: 16px;
+
+  width: 180px;
+  max-height: 260px;
+
+  background: var(--card-light);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+
+  overflow-y: auto;
+  z-index: 9999;
+
+  /* 🔥 ANDROID TOUCH FIXES */
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.dark .lang-popup {
+  background: var(--card-dark);
+}
+
+/* =========================
+   LIST RESET
+========================= */
+
+.lang-popup ul {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+}
+
+/* =========================
+   LANGUAGE ITEMS
+========================= */
+
+.lang-popup li {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  color: var(--text-light);
+
+  /* Touch safety */
+  pointer-events: auto;
+}
+
+body.dark .lang-popup li {
+  color: var(--text-dark);
+}
+
+/* Hover / tap feedback */
+.lang-popup li:hover,
+.lang-popup li:active {
+  background: rgba(48,209,88,.15);
+}
+
+/* Active language */
+.lang-popup li.active {
+  color: var(--apple-green);
+  font-weight: 800;
+}
+
+/* =========================
+   VISIBILITY
+========================= */
+
+.lang-popup.hidden {
+  display: none;
+}
+
+/* =========================
+   SCROLLBAR (ANDROID SAFE)
+========================= */
+
+.lang-popup::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* =========================
+   RTL SUPPORT
+========================= */
+
+html[dir="rtl"] .lang-popup li {
+  text-align: right;
+}
+
+/* =========================
+   iOS STYLE – BANNER FONT
+========================= */
+
+/* Title: Thermal Control */
+.banner-text h1 {
+  font-family: -apple-system, BlinkMacSystemFont,
+               "SF Pro Display", "SF Pro Text",
+               "Segoe UI", Roboto, system-ui, sans-serif;
+
+  font-size: 22px;
+  font-weight: 600;        /* iOS headline */
+  letter-spacing: -0.25px;
+}
+
+/* Subtitle: T-ENGINE */
+.banner-text p {
+  font-family: -apple-system, BlinkMacSystemFont,
+               "SF Pro Text",
+               "Segoe UI", Roboto, system-ui, sans-serif;
+
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  opacity: 0.85;
+}
+
+/* Online / Offline badge */
+.status-badge {
+  font-family: -apple-system, BlinkMacSystemFont,
+               "SF Pro Text",
+               "Segoe UI", Roboto, system-ui, sans-serif;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* =========================
+   TEMPERATURE COLOR SYSTEM
+========================= */
+
+/* Temperature display element */
+#batteryTemp {
+  font-weight: 900;
+  transition: color 0.3s ease;
+}
+
+/* Temperature colors based on value */
+#batteryTemp.cool {
+  color: var(--apple-green);      /* ≤30°C */
+}
+
+#batteryTemp.green {
+  color: var(--apple-green);      /* 30-39°C */
+}
+
+#batteryTemp.warm {
+  color: #ff9500;                 /* 40-44°C (Apple orange) */
+}
+
+#batteryTemp.hot {
+  color: var(--danger);           /* ≥45°C */
+}
+
+/* Optional: Add glow effect for critical temps */
+#batteryTemp.critical {
+  color: #ff3b30;
+  text-shadow: 0 0 10px rgba(255, 59, 48, 0.4);
+}
+/* =========================
+   BATTERY CARD STYLES
+========================= */
+.battery-card {
+  padding: 20px;
+  margin-top: 14px;
+  border-radius: 12px;
+  background: var(--card-bg);
+  transition: all 0.3s ease;
+}
+
+/* Battery Header */
+.battery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.battery-percent {
+  text-align: center;
+}
+
+.percent-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sub-light);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.percent-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #30d158 0%, #34c759 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(48, 209, 88, 0.3);
+  transition: all 0.3s ease;
+}
+
+.percent-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.charging-info {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.charging-type {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text-light);
+}
+
+.time-remaining {
+  margin-bottom: 6px;
+}
+
+.time-label {
+  font-size: 13px;
+  color: var(--sub-light);
+  margin-right: 6px;
+}
+
+.time-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.charging-speed {
+  font-size: 13px;
+  color: #30d158;
+  font-weight: 600;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--divider-light);
+  margin: 16px 0;
+  opacity: 0.4;
+}
+
+/* Battery Stats */
+.battery-stats {
+  padding-top: 8px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--sub-light);
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.stat-value {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+/* =========================
+   TEMPERATURE COLORS
+========================= */
+#batteryTemp.normal {
+  color: #30d158; /* Green: 20-35°C */
+}
+
+#batteryTemp.warm {
+  color: #ff9500; /* Orange: 35-40°C */
+}
+
+#batteryTemp.hot {
+  color: #ff3b30; /* Red: 40-45°C */
+}
+
+#batteryTemp.very-hot {
+  color: #ff2d55; /* Bright Red: >45°C */
+}
+
+#batteryTemp.cold {
+  color: #5ac8fa; /* Blue: <20°C */
+}
+
+/* =========================
+   CURRENT AND POWER COLORS
+========================= */
+/* Current Row */
+.current-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(48, 209, 88, 0.1);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.current-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.current-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #30d158;
+  transition: all 0.3s ease;
+}
+
+/* Input Voltage Row */
+.input-voltage-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(0, 122, 255, 0.1);
+  border-radius: 10px;
+}
+
+.input-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.input-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #007aff;
+}
+
+/* =========================
+   POWER COLORS
+========================= */
+#batteryPower.charge {
+  color: #30d158;
+  font-weight: 700;
+}
+
+#batteryPower.discharge {
+  color: #ff3b30;
+  font-weight: 700;
+}
+
+/* Charge type colors */
+#chargeType.charging {
+  color: #30d158;
+  font-weight: 600;
+}
+
+#chargeType.discharging {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+#chargeType.full {
+  color: #007aff;
+  font-weight: 600;
+}
+
+/* =========================
+   CHARGING SPEED TEXT
+========================= */
+#chargingSpeed.charge {
+  color: #30d158;
+  font-weight: 600;
+}
+
+#chargingSpeed.turbo {
+  color: #FFFFFF;
+  font-weight: 700;
+  text-shadow: 0 0 8px #2E6BFF, 0 0 16px #7A3CFF;
+  background: linear-gradient(90deg, #2E6BFF, #7A3CFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: turbo-text-glow 2s ease-in-out infinite;
+}
+
+@keyframes turbo-text-glow {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 
+      0 0 10px #2E6BFF,
+      0 0 20px #3F8CFF,
+      0 0 30px #7A3CFF;
+  }
+  50% {
+    opacity: 0.9;
+    text-shadow: 
+      0 0 15px #3F8CFF,
+      0 0 25px #7A3CFF,
+      0 0 35px #5A2DCC;
+  }
+}
+
+#chargingSpeed.discharging {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* =========================
+   TIME DISPLAY - NO BACKGROUND GLOW
+========================= */
+/* Time display has NO special styling - just normal text */
+#batteryTime {
+  /* Normal time display - no glow, no special background */
+}
+
+/* Remove all previous time glow classes */
+#batteryTime.quick-charge,
+#batteryTime.mi-turbo {
+  /* NO special styling for time display */
+}
+
+/* =========================
+   BANNER GLOW (ONLY FOR CHARGING)
+========================= */
+.banner.turbo-glow {
+  background: linear-gradient(90deg, 
+    rgba(46, 107, 255, 0.1) 0%,
+    rgba(122, 60, 255, 0.1) 100%
+  );
+  border-left: 3px solid #2E6BFF;
+  animation: banner-glow 3s ease-in-out infinite;
+}
+
+@keyframes banner-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(46, 107, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(122, 60, 255, 0.4);
+  }
+}
+
+/* =========================
+   DARK MODE
+========================= */
+body.dark .battery-card {
+  background: var(--card-bg-dark);
+}
+
+body.dark .percent-circle {
+  background: linear-gradient(135deg, #30d158 0%, #2da84f 100%);
+}
+
+body.dark .charging-type {
+  color: var(--text-dark);
+}
+
+body.dark .time-value {
+  color: var(--text-dark);
+}
+
+body.dark .stat-value {
+  color: var(--text-dark);
+}
+
+body.dark .current-label {
+  color: var(--text-dark);
+}
+
+body.dark .current-row {
+  background: rgba(48, 209, 88, 0.15);
+}
+
+body.dark .input-voltage-row {
+  background: rgba(0, 122, 255, 0.15);
+}
+
+body.dark .input-label {
+  color: var(--text-dark);
+}
+
+/* Temperature colors in dark mode */
+body.dark #batteryTemp.normal {
+  color: #30d158;
+}
+
+body.dark #batteryTemp.warm {
+  color: #ff9500;
+}
+
+body.dark #batteryTemp.hot {
+  color: #ff3b30;
+}
+
+body.dark #batteryTemp.very-hot {
+  color: #ff2d55;
+}
+
+body.dark #batteryTemp.cold {
+  color: #5ac8fa;
+}
+
+/* Dark mode charging speed */
+body.dark #chargingSpeed.turbo {
+  text-shadow: 
+    0 0 12px #2E6BFF,
+    0 0 24px #7A3CFF,
+    0 0 36px rgba(122, 60, 255, 0.7);
+}
+
+body.dark .banner.turbo-glow {
+  background: linear-gradient(90deg, 
+    rgba(46, 107, 255, 0.15) 0%,
+    rgba(122, 60, 255, 0.15) 50%,
+    rgba(46, 107, 255, 0.15) 100%
+  );
+}
+
+/* Discharging colors in dark mode */
+body.dark #batteryPower.discharge {
+  color: #ff3b30;
+}
+
+body.dark #chargeType.discharging {
+  color: var(--text-dark);
+}
+
+body.dark #chargingSpeed.discharging {
+  color: var(--text-dark);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 380px) {
+  .battery-card {
+    padding: 16px;
+  }
+  
+  .percent-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .percent-value {
+    font-size: 20px;
+  }
+  
+  .charging-type {
+    font-size: 14px;
+  }
+  
+  .time-value {
+    font-size: 13px;
+  }
+  
+  .charging-speed {
+    font-size: 12px;
+  }
+  
+  .stat-value {
+    font-size: 14px;
+  }
+  
+  .current-value,
+  .input-value {
+    font-size: 14px;
+  }
+}
